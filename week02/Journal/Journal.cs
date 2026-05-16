@@ -4,68 +4,70 @@ using System.IO;
 
 public class Journal
 {
-    public List<Entry> _entries = new List<Entry>();
+    private List<Entry> _entries = new List<Entry>();
 
-    public void AddEntry(Entry newEntry)
+    public void AddEntry(Entry entry)
     {
-        _entries.Add(newEntry);
+        _entries.Add(entry);
     }
 
     public void DisplayAll()
     {
         foreach (Entry entry in _entries)
         {
-            entry.Display();
+            Console.WriteLine(entry.GetDisplayString());
         }
-
-        Console.WriteLine($"Total Entries: {_entries.Count}");
     }
 
-    public void SaveToFile(string file)
+    public void SaveToFile(string filename)
     {
-        using (StreamWriter outputFile = new StreamWriter(file))
+        List<string> lines = new List<string>();
+
+        foreach (Entry entry in _entries)
         {
-            foreach (Entry entry in _entries)
-            {
-                outputFile.WriteLine($"{entry._date}|{entry._time}|{entry._promptText}|{entry._entryText}");
-            }
+            lines.Add(entry.ToFileFormat());
         }
+
+        File.WriteAllLines(filename, lines);
+        Console.WriteLine("Journal saved successfully.");
     }
 
-    public void LoadFromFile(string file)
+    public void LoadFromFile(string filename)
     {
-        string[] lines = File.ReadAllLines(file);
-
         _entries.Clear();
+
+        if (!File.Exists(filename))
+        {
+            Console.WriteLine("File not found.");
+            return;
+        }
+
+        string[] lines = File.ReadAllLines(filename);
 
         foreach (string line in lines)
         {
-            string[] parts = line.Split("|");
-
-            Entry entry = new Entry();
-
-            entry._date = parts[0];
-
-            entry._time = parts[1];
-
-            entry._promptText = parts[2];
-
-            entry._entryText = parts[3];
-
-            _entries.Add(entry);
+            _entries.Add(Entry.FromFileFormat(line));
         }
+
+        Console.WriteLine("Journal loaded successfully.");
     }
 
     public void SearchEntries(string keyword)
     {
-        Console.WriteLine("Search Results:");
+        bool found = false;
 
         foreach (Entry entry in _entries)
         {
-            if (entry._entryText.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+            if (entry.EntryText.Contains(keyword, StringComparison.OrdinalIgnoreCase))
             {
-                entry.Display();
+                Console.WriteLine(entry.GetDisplayString());
+                found = true;
             }
+        }
+
+        if (!found)
+        {
+            Console.WriteLine("No matching entries found.");
         }
     }
 }
