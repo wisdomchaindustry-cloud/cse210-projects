@@ -1,0 +1,87 @@
+Exercise Tracking Program User Documentation
+
+Project Title Exercise Tracking Program
+
+Course CSE 210 – Programming with Classes
+
+Purpose of the Program
+
+The Exercise Tracking Program is a fitness activity tracker that records
+different types of exercises and calculates important workout statistics
+automatically.
+
+The program supports three exercise activities: - Running - Cycling -
+Swimming
+
+For each activity, the program calculates: - Distance covered - Speed
+achieved - Pace maintained - A complete activity summary
+
+The main purpose of the project is to demonstrate the Object-Oriented
+Programming (OOP) concepts of Inheritance, Polymorphism, Encapsulation,
+and Abstraction.
+
+PROGRAM FEATURES
+
+Running Activities - Date of activity - Duration in minutes - Distance
+covered The program automatically calculates speed and pace.
+
+Cycling Activities - Date of activity - Duration in minutes - Cycling
+speed The program automatically calculates distance and pace.
+
+Swimming Activities - Date of activity - Duration in minutes - Number of
+laps completed The program automatically calculates distance, speed, and
+pace. Each swimming lap is assumed to be 50 meters.
+
+HOW THE PROGRAM WORKS
+
+1.  Create Activities Running, Cycling, and Swimming activity objects
+    are created.
+
+2.  Store Activities All activities are stored in a List.
+
+3.  Calculate Statistics Each activity calculates its own distance,
+    speed, and pace.
+
+4.  Display Summary The program loops through all activities and
+    displays a summary.
+
+Sample Output
+
+03 Nov 2022 Running (30 min): Distance 4.8 km, Speed 9.6 kph, Pace: 6.25
+min per km 03 Nov 2022 Cycling (45 min): Distance 15.0 km, Speed 20.0
+kph, Pace: 3.00 min per km 03 Nov 2022 Swimming (40 min): Distance 1.5
+km, Speed 2.3 kph, Pace: 26.67 min per km
+
+PROGRAM STRUCTURE
+
+Activity Class (Base Class) Contains shared information: - Date -
+Minutes
+
+Methods: - GetDistance() - GetSpeed() - GetPace() - GetSummary()
+
+Running Class Stores distance and calculates speed and pace.
+
+Cycling Class Stores speed and calculates distance and pace.
+
+Swimming Class Stores laps and calculates distance, speed, and pace.
+
+OBJECT-ORIENTED PROGRAMMING CONCEPTS USED
+
+Encapsulation All variables are private to protect data.
+
+Inheritance Running, Cycling, and Swimming inherit from Activity.
+
+Abstraction The Activity class defines common behaviors while derived
+classes provide implementations.
+
+Polymorphism Different activity types are stored in one List and respond
+differently to the same method calls.
+
+Advantages of the Design - Easy to add new activity types - Reduces
+duplicate code - Demonstrates inheritance and polymorphism - Easy to
+maintain and update
+
+Conclusion The Exercise Tracking Program is a simple fitness tracking
+application that records exercise activities and automatically
+calculates distance, speed, and pace using object-oriented programming
+principles.
